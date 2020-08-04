@@ -1,7 +1,8 @@
-package com.example.authloginmethods
+package com.example.authloginmethods.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.authloginmethods.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
