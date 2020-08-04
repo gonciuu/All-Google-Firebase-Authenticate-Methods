@@ -41,13 +41,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_anomyus"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Anomyus"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -69,13 +71,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_email"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Email password"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -106,13 +110,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:src="@drawable/ic_phone"
+                    android:padding="2dp"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Phone"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -134,13 +140,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:src="@drawable/ic_google"
+                    android:padding="2dp"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Google"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -171,13 +179,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:src="@drawable/ic_play_games"
+                    android:padding="2dp"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Play Games"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -198,6 +208,8 @@
 
                 <ImageView
                     android:layout_width="70dp"
+                    android:src="@drawable/ic_game_center"
+                    android:padding="2dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center" />
 
@@ -205,7 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Game Center"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -236,13 +248,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:src="@drawable/ic_facebook"
+                    android:padding="2dp"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Facebook"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -264,13 +278,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:src="@drawable/ic_twitter"
+                    android:padding="2dp"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Twitter"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -301,13 +317,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:src="@drawable/ic_github"
+                    android:padding="2dp"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="GitHub"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -329,13 +347,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_yahoo"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Yahoo"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -365,6 +385,8 @@
 
                 <ImageView
                     android:layout_width="70dp"
+                    android:src="@drawable/ic_microsoft"
+                    android:padding="2dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center" />
 
@@ -372,7 +394,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Microsoft"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
@@ -394,13 +416,15 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:src="@drawable/ic_apple"
+                    android:padding="2dp"
                     android:layout_gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/segoeui"
-                    android:text="email"
+                    android:text="Apple"
                     android:textAlignment="center"
                     android:textColor="@color/dark_text"
                     android:textSize="18sp" />
