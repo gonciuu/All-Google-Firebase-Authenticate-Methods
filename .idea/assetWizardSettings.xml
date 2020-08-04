@@ -11,11 +11,26 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/lock/baseline_lock_24.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_google" />
-                            <entry key="sourceFile" value="C:\Users\ideapad\Desktop\auth_service_google.svg" />
+                            <entry key="color" value="404040" />
+                            <entry key="outputName" value="ic_lock" />
+                            <entry key="sourceFile" value="C:\Users\ideapad\Desktop\Programowanie\kotlin-aplikacje\Myself Projects\AuthLoginMethods" />
                           </map>
                         </option>
                       </PersistentState>
