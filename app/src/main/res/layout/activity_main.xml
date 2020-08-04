@@ -28,6 +28,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/anomyusLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -58,6 +59,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/loginAndPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -97,6 +99,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/phoneLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -127,6 +130,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/googleLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -166,6 +170,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/googlePlayGamesLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -196,6 +201,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/gameCenterLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -235,6 +241,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/facebookLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -265,6 +272,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/twitterLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -304,6 +312,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/githubLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -334,6 +343,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/yahooLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -373,6 +383,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/microsoftLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -403,6 +414,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/appleLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
