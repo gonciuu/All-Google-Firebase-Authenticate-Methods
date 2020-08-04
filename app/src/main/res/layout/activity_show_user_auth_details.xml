@@ -13,6 +13,7 @@
 
 
     <TextView
+        android:id="@+id/mainText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Jakis glowny text"
@@ -23,6 +24,7 @@
 
 
     <TextView
+        android:id="@+id/userInfo1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -32,6 +34,7 @@
         android:padding="15dp"
         android:fontFamily="@font/segoeui"/>
     <TextView
+        android:id="@+id/userInfo2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -41,6 +44,7 @@
         android:fontFamily="@font/segoeui"/>
 
     <TextView
+        android:id="@+id/userInfo3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -51,6 +55,7 @@
 
 
     <Button
+        android:id="@+id/logOutButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
