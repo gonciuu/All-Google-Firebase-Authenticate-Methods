@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/abc_vector_test"/>
+        android:src="@drawable/ic_anomyus"/>
 
     <EditText
         android:id="@+id/userInputEmail"
