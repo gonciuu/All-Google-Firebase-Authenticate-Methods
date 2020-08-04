@@ -16,11 +16,12 @@ class Authenticate {
     private lateinit var userInfoViewModel: UserInfoViewModel
 
     fun signInAnomyus(activity:MainActivity){
-        userInfoViewModel = ViewModelProvider(activity).get(userInfoViewModel::class.java)
+        userInfoViewModel = ViewModelProvider(activity).get(UserInfoViewModel::class.java)
         auth.signInAnonymously().addOnCompleteListener {task->
             if(task.isSuccessful){
                 activity.startActivity(Intent(activity.applicationContext,ShowUserAuthDetails::class.java))
-                userInfoViewModel.setInfo(task.result!!.user.uid)
+                val user = task.result!!.user
+                userInfoViewModel.setInfo(user.uid,user.email,user.phoneNumber,user.displayName)
             }
             else Toast.makeText(activity.applicationContext,"Error when creating anon account",Toast.LENGTH_SHORT).show()
         }
