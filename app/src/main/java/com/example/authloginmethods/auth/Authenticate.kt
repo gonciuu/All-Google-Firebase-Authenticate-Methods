@@ -24,7 +24,9 @@ class Authenticate {
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val user = task.result!!.user
-                userDetailsViewModel.setInfo(user.uid)
+                val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
+                    if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
+                userDetailsViewModel.setInfo(listOfInfo)
                 fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
                 Log.d("TAG",user.uid)
             } else Toast.makeText(fragment.context, "Error when creating anon account", Toast.LENGTH_SHORT).show()

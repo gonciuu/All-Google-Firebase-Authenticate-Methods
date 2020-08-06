@@ -35,7 +35,10 @@ class UserDetailsFragment : Fragment() {
 
         userDetailsViewModel.getInfo().observe(viewLifecycleOwner, Observer {
                 info->
-            userInfo1.text = info
+            mainText.text = info[0]
+            userInfo1.text = info[1]
+            userInfo2.text = info[2]
+            userInfo3.text = info[3]
         })
     }
 
