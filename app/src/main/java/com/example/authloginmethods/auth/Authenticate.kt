@@ -3,27 +3,31 @@ package com.example.authloginmethods.auth
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.authloginmethods.R
+import com.example.authloginmethods.screens.view_models.UserDetailsViewModel
 
-import com.example.authloginmethods.screens.MainActivity
-import com.example.authloginmethods.screens.ShowUserAuthDetails
 import com.example.authloginmethods.screens.view_models.UserInfoViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class Authenticate {
 
     private val auth = FirebaseAuth.getInstance()
-    private lateinit var userInfoViewModel: UserInfoViewModel
+    private lateinit var userDetailsViewModel: UserDetailsViewModel
 
-    fun signInAnomyus(activity: MainActivity) {
-        userInfoViewModel = ViewModelProvider(activity).get(UserInfoViewModel::class.java)
+    fun signInAnomyus(fragment: Fragment) {
+        userDetailsViewModel = ViewModelProvider(fragment.requireActivity()).get(UserDetailsViewModel::class.java)
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                activity.startActivity(Intent(activity.applicationContext, ShowUserAuthDetails::class.java))
                 val user = task.result!!.user
+                userDetailsViewModel.setInfo(user.uid)
+                fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
                 Log.d("TAG",user.uid)
-                userInfoViewModel.setInfo(user.uid)
-            } else Toast.makeText(activity.applicationContext, "Error when creating anon account", Toast.LENGTH_SHORT).show()
+            } else Toast.makeText(fragment.context, "Error when creating anon account", Toast.LENGTH_SHORT).show()
         }
     }
 

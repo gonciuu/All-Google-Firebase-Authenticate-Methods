@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/auth_methods_nav"
+    app:startDestination="@id/loginMethodsFragment">
+
+    <fragment
+        android:id="@+id/loginMethodsFragment"
+        android:name="com.example.authloginmethods.screens.screens.LoginMethodsFragment"
+        android:label="LoginMethodsFragment" >
+        <action
+            android:id="@+id/action_loginMethodsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_loginMethodsFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.authloginmethods.screens.screens.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.example.authloginmethods.screens.screens.UserDetailsFragment"
+        android:label="UserDetailsFragment" >
+        <action
+            android:id="@+id/action_userDetailsFragment_to_loginMethodsFragment"
+            app:destination="@id/loginMethodsFragment" />
+    </fragment>
+</navigation>

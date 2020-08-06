@@ -11,20 +11,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val authenticate = Authenticate()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        anomyusLogin.setOnClickListener {
-            Toast.makeText(applicationContext,"Loading...",Toast.LENGTH_SHORT).show()
-            authenticate.signInAnomyus(this)
-        }
     }
 
 }
