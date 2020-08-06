@@ -10,15 +10,15 @@ import com.example.authloginmethods.screens.view_models.UserDetailsViewModel
 
 import com.google.firebase.auth.FirebaseAuth
 
-class Authenticate {
+class Authenticate(private val fragment: Fragment) {
 
     private val auth = FirebaseAuth.getInstance()
-    private lateinit var userDetailsViewModel: UserDetailsViewModel
+    private var userDetailsViewModel: UserDetailsViewModel = ViewModelProvider(fragment.requireActivity()).get(UserDetailsViewModel::class.java)
+
 
 
     //--------------------------------Sign in Anon--------------------------------------------
-    fun signInAnomyus(fragment: Fragment) {
-        userDetailsViewModel = ViewModelProvider(fragment.requireActivity()).get(UserDetailsViewModel::class.java)
+    fun signInAnomyus() {
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val user = task.result!!.user
@@ -31,6 +31,12 @@ class Authenticate {
         }
     }
     //=========================================================================================
+
+
+    fun logOut(){
+        auth.signOut()
+        fragment.findNavController().navigate(R.id.action_userDetailsFragment_to_loginMethodsFragment)
+    }
 
 
 }

@@ -13,7 +13,7 @@ import com.example.authloginmethods.auth.Authenticate
 import kotlinx.android.synthetic.main.login_methods_fragment.*
 
 class LoginMethodsFragment : Fragment() {
-    private val authenticate = Authenticate()
+    private lateinit var authenticate: Authenticate
     companion object {
         fun newInstance() = LoginMethodsFragment()
     }
@@ -29,9 +29,10 @@ class LoginMethodsFragment : Fragment() {
     //------click on login methods buttons------
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        authenticate = Authenticate(this)
         anomyusLogin.setOnClickListener {
             Toast.makeText(context,"Loading...", Toast.LENGTH_SHORT).show()
-            authenticate.signInAnomyus(this)
+            authenticate.signInAnomyus()
         }
     }
 
