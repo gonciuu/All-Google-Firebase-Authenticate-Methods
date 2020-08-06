@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class UserDetailsViewModel : ViewModel() {
+
+    //set and get user info
+
     private val userInfoList = MutableLiveData<ArrayList<String>>()
 
     fun setInfo(userInfo : ArrayList<String>){
