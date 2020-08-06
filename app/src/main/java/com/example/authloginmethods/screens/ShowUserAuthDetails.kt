@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.authloginmethods.R
 import com.example.authloginmethods.screens.view_models.UserInfoViewModel
+import kotlinx.android.synthetic.main.activity_show_user_auth_details.*
 
 class ShowUserAuthDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +16,7 @@ class ShowUserAuthDetails : AppCompatActivity() {
 
         userInfoViewModel.getInfo().observe(this, Observer {
             info->
-
+            userInfo1.text = info[0]
         })
     }
 }

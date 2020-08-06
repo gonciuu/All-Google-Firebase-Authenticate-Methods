@@ -15,15 +15,15 @@ class Authenticate {
     private val auth = FirebaseAuth.getInstance()
     private lateinit var userInfoViewModel: UserInfoViewModel
 
-    fun signInAnomyus(activity:MainActivity){
+    fun signInAnomyus(activity: MainActivity) {
         userInfoViewModel = ViewModelProvider(activity).get(UserInfoViewModel::class.java)
-        auth.signInAnonymously().addOnCompleteListener {task->
-            if(task.isSuccessful){
-                activity.startActivity(Intent(activity.applicationContext,ShowUserAuthDetails::class.java))
+        auth.signInAnonymously().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                activity.startActivity(Intent(activity.applicationContext, ShowUserAuthDetails::class.java))
                 val user = task.result!!.user
-                userInfoViewModel.setInfo(user.uid,user.email,user.phoneNumber,user.displayName)
-            }
-            else Toast.makeText(activity.applicationContext,"Error when creating anon account",Toast.LENGTH_SHORT).show()
+                Log.d("TAG",user.uid)
+                userInfoViewModel.setInfo(user.uid)
+            } else Toast.makeText(activity.applicationContext, "Error when creating anon account", Toast.LENGTH_SHORT).show()
         }
     }
 
