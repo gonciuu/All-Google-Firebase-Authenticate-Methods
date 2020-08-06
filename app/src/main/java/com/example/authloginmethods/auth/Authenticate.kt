@@ -39,4 +39,20 @@ class Authenticate(private val fragment: Fragment) {
     }
 
 
+    fun getCurrentUser(){
+        val user = auth.currentUser
+        if(user!=null) {
+            val listOfInfo = arrayListOf<String>(
+                user.uid,
+                if (!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
+                if (!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number",
+                if (!user.email.isNullOrEmpty()) user.email!! else "No email"
+            )
+            userDetailsViewModel.setInfo(listOfInfo)//set info about user account
+            fragment.findNavController()
+                .navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
+        }
+    }
+
+
 }
