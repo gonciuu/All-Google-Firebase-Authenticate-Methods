@@ -33,11 +33,19 @@ class LoginMethodsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         authenticate = Authenticate(this)
         authenticate.getCurrentUser()//check if user is already exist 
+
+        //--------anomyus login---------
         anomyusLogin.setOnClickListener {
-            Toast.makeText(context,"Loading...", Toast.LENGTH_SHORT).show()
+            makeLoadingText()
             authenticate.signInAnomyus()
+        }
+
+        //-------------email and password login--------------
+        loginAndPasswordLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_loginMethodsFragment_to_loginFragment)
         }
     }
 
+    private fun makeLoadingText() =  Toast.makeText(context,"Loading...", Toast.LENGTH_SHORT).show()
 
 }
