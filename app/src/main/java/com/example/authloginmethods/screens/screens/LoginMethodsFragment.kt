@@ -32,7 +32,7 @@ class LoginMethodsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         authenticate = Authenticate(this)
-        authenticate.getCurrentUser()
+        authenticate.getCurrentUser()//check if user is already exist 
         anomyusLogin.setOnClickListener {
             Toast.makeText(context,"Loading...", Toast.LENGTH_SHORT).show()
             authenticate.signInAnomyus()

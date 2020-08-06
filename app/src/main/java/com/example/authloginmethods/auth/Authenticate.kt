@@ -33,12 +33,14 @@ class Authenticate(private val fragment: Fragment) {
     //=========================================================================================
 
 
+    //----log out-------
     fun logOut(){
         auth.signOut()
         fragment.findNavController().navigate(R.id.action_userDetailsFragment_to_loginMethodsFragment)
     }
 
 
+    //------------get current user and navigate to userDetails if the user exist---------------
     fun getCurrentUser(){
         val user = auth.currentUser
         if(user!=null) {
@@ -53,6 +55,7 @@ class Authenticate(private val fragment: Fragment) {
                 .navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
         }
     }
+    //===========================================================================================
 
 
 }
