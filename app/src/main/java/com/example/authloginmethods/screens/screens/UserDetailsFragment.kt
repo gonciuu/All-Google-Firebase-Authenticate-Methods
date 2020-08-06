@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.authloginmethods.R
+import com.example.authloginmethods.auth.Authenticate
 import com.example.authloginmethods.screens.view_models.UserDetailsViewModel
 import kotlinx.android.synthetic.main.user_details_fragment.*
 
@@ -18,6 +19,7 @@ class UserDetailsFragment : Fragment() {
     }
 
 
+    private lateinit var authenticate: Authenticate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,7 @@ class UserDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        authenticate = Authenticate(this)
         //get user info and set it into layout
         val userDetailsViewModel = ViewModelProvider(requireActivity()).get(UserDetailsViewModel::class.java)
         userDetailsViewModel.getInfo().observe(viewLifecycleOwner, Observer {
@@ -38,6 +41,12 @@ class UserDetailsFragment : Fragment() {
             userInfo2.text = info[2]
             userInfo3.text = info[3]
         })
+
+        //log out button
+        logOutButton.setOnClickListener {
+            authenticate.logOut()
+        }
+
     }
 
 }
