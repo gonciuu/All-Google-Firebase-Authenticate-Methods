@@ -17,7 +17,11 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.authloginmethods.screens.screens.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"
         android:name="com.example.authloginmethods.screens.screens.UserDetailsFragment"

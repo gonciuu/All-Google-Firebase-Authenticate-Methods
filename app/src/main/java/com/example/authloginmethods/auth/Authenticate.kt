@@ -69,9 +69,11 @@ class Authenticate(private val fragment: Fragment) {
                 val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
                     if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
                 userDetailsViewModel.setInfo(listOfInfo)//set info about user account
-                fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)//navigate to fragment
+                try {
+                    fragment.findNavController().navigate(R.id.action_loginFragment_to_userDetailsFragment)//navigate to fragment
+                }catch (ex:java.lang.Exception){}
                 Log.d("TAG",user.uid)
-            } else Toast.makeText(fragment.context, "Error when creating anon account", Toast.LENGTH_SHORT).show()
+            } else Toast.makeText(fragment.context, "Error when creating account", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -83,9 +85,11 @@ class Authenticate(private val fragment: Fragment) {
                 val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
                     if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
                 userDetailsViewModel.setInfo(listOfInfo)//set info about user account
-                fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)//navigate to fragment
+                try {
+                    fragment.findNavController().navigate(R.id.action_loginFragment_to_userDetailsFragment)//navigate to fragment
+                }catch (ex:java.lang.Exception){}
                 Log.d("TAG",user.uid)
-            } else Toast.makeText(fragment.context, "Error when creating anon account", Toast.LENGTH_SHORT).show()
+            } else Toast.makeText(fragment.context, "Error when creating account", Toast.LENGTH_SHORT).show()
         }
     }
 
