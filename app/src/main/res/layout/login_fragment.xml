@@ -36,6 +36,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:padding="15dp"
+        android:inputType="textPassword"
         android:drawableLeft="@drawable/ic_lock"
         android:drawablePadding="20dp"
         android:fontFamily="@font/segoeui"

@@ -63,6 +63,7 @@ class Authenticate(private val fragment: Fragment) {
     //--------------login with email and password--------------
 
     fun loginWithEmailAndPassword(email:String,password:String){
+        Toast.makeText(fragment.context,"Loading...", Toast.LENGTH_SHORT).show()
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {task->
             if (task.isSuccessful) {
                 val user = task.result!!.user
@@ -79,6 +80,7 @@ class Authenticate(private val fragment: Fragment) {
 
     //--------------register with email and password--------------
     fun registerWithEmailAndPassword(email:String,password:String){
+        Toast.makeText(fragment.context,"Loading...", Toast.LENGTH_SHORT).show()
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {task->
             if (task.isSuccessful) {
                 val user = task.result!!.user
