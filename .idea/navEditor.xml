@@ -36,12 +36,29 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_loginMethodsFragment_to_phoneNumberFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_loginMethodsFragment_to_userDetailsFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="phoneNumberFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="492" />
+                            <option name="y" value="454" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -54,6 +71,15 @@
                             <option name="x" value="499" />
                             <option name="y" value="66" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_userDetailsFragment_to_loginMethodsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
