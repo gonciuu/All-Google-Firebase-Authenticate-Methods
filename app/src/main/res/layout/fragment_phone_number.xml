@@ -5,7 +5,20 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="#E3E3E3"
     tools:context=".screens.screens.PhoneNumberFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#343434"
+        android:text="Enter Phone Number"
+        android:fontFamily="@font/segoeui"
+        android:textSize="24sp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="10dp"/>
+
 
     <EditText
         android:id="@+id/userInputPhoneNumber"
