@@ -58,9 +58,10 @@ class Authenticate(private val fragment: Fragment) {
     //===========================================================================================
 
     //-------------------------------Login with phone number-----------------------------
-    private fun loginWithPhoneNumber(phoneNumber:String){
+    fun loginWithPhoneNumber(phoneNumber:String){
 
     }
+    //===================================================================================
 
 
 }

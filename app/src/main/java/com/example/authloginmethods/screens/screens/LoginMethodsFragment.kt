@@ -37,6 +37,9 @@ class LoginMethodsFragment : Fragment() {
             Toast.makeText(context,"Loading...", Toast.LENGTH_SHORT).show()
             authenticate.signInAnomyus()
         }
+        phoneLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_loginMethodsFragment_to_phoneNumberFragment)
+        }
     }
 
 
