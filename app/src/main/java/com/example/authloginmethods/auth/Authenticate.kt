@@ -9,12 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.authloginmethods.R
 import com.example.authloginmethods.screens.view_models.UserDetailsViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-
 import kotlinx.android.synthetic.main.fragment_phone_number.*
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class Authenticate(private val fragment: Fragment) {
@@ -162,6 +162,11 @@ class Authenticate(private val fragment: Fragment) {
             if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
     }
     //===================================================================================
+
+    fun firebaseAuthWithGoogle(idToken:String){
+
+
+    }
 
 
 }

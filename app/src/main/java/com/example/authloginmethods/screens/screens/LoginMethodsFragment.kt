@@ -1,23 +1,29 @@
 package com.example.authloginmethods.screens.screens
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-
 import com.example.authloginmethods.R
 import com.example.authloginmethods.auth.Authenticate
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.login_methods_fragment.*
+
 
 class LoginMethodsFragment : Fragment() {
     private lateinit var authenticate: Authenticate
+
     companion object {
         fun newInstance() = LoginMethodsFragment()
+        const val RC_SIGN_IN = 123
     }
 
     override fun onCreateView(
@@ -49,8 +55,40 @@ class LoginMethodsFragment : Fragment() {
         phoneLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_phoneNumberFragment)
         }
+        googleLogin.setOnClickListener {
+            makeLoadingText()
+            loginWithGoogleAccount()
+        }
     }
 
-    private fun makeLoadingText() =  Toast.makeText(context,"Loading...", Toast.LENGTH_SHORT).show()
+    private fun makeLoadingText() = Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
 
+
+    private fun loginWithGoogleAccount() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(requireActivity().getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try{
+                val account = task.getResult(ApiException::class.java)!!
+                Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
+                authenticate.firebaseAuthWithGoogle(account.idToken!!)
+            }catch (e:ApiException){
+                Toast.makeText(context,"Api token error $e",Toast.LENGTH_SHORT).show()
+                Log.w("TAG", "Google sign in failed", e)
+            }
+        }
+
+
+    }
 }
