@@ -156,12 +156,12 @@ class Authenticate(private val fragment: Fragment) {
     }
     //=============================================================
 
-
-
-
+    //-----------------------set user data in list and return this-----------------------
     private fun setListOfUserInfo(user:FirebaseUser) : ArrayList<String> {
-        return arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
+        return arrayListOf(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
             if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
     }
+    //===================================================================================
+
 
 }
