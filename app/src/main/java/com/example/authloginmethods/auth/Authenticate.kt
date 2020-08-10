@@ -174,7 +174,6 @@ class Authenticate(private val fragment: Fragment) {
                     fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment) //complete
                 }catch (ex:java.lang.Exception){}
             }else{
-                Log.w("TAG", "signInWithCredential:failure", task.exception)
                 Snackbar.make(fragment.requireView(), "Authentication Failed. ${task.exception}", Snackbar.LENGTH_SHORT).show() //failure
             }
         }

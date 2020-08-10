@@ -84,11 +84,9 @@ class LoginMethodsFragment : Fragment() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try{
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
                 authenticate.firebaseAuthWithGoogle(account.idToken!!)//login with account id token
             }catch (e:ApiException){
                 Toast.makeText(context,"Api token error $e",Toast.LENGTH_SHORT).show()
-                Log.w("TAG", "Google sign in failed", e)
             }
         }
     }
