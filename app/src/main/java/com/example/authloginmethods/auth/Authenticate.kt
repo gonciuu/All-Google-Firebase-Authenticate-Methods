@@ -76,7 +76,7 @@ class Authenticate(private val fragment: Fragment) {
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                Log.d("TAG", "onVerificationCompleted:$credential")
+                Log.d("TAG", "onVerificationCompleted:$credential")             //verifi completed
                 fragment.error_message.text = ""
                 signInWithPhoneAuthCredential(credential)
             }
@@ -84,7 +84,7 @@ class Authenticate(private val fragment: Fragment) {
             override fun onVerificationFailed(e: FirebaseException) {
                 Log.w("TAG", "onVerificationFailed", e)
 
-                when (e) {
+                when (e) {                                                              //verifi failed
                     is FirebaseAuthInvalidCredentialsException -> fragment.error_message.text = "Bad phone number. Try again with another number. ${e.message}"
                     is FirebaseTooManyRequestsException -> fragment.error_message.text = "To many requests try again later. ${e.message}"
                     else -> fragment.error_message.text = "Error ${e.message}"
@@ -93,7 +93,7 @@ class Authenticate(private val fragment: Fragment) {
 
             override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                 Log.d("TAG", "onCodeSent:$verificationId")
-                storedVerificationId = verificationId
+                storedVerificationId = verificationId                                   //send code to user to confirmation
                 fragment.userInputVerificationId.visibility = View.VISIBLE
                 fragment.userVerifyCodeButton.visibility = View.VISIBLE
             }
@@ -117,8 +117,10 @@ class Authenticate(private val fragment: Fragment) {
 
 
     }
+    //=======================================================================================
 
 
+    //---------------------------------------------SIGN IN WITH CREADENCIAL (PHONE NUMBER VERIFICATION---------------------------------------------
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
@@ -137,7 +139,7 @@ class Authenticate(private val fragment: Fragment) {
                 }
             }
     }
+    //=================================================================================================================================================
 
-    //===================================================================================
 
 }
