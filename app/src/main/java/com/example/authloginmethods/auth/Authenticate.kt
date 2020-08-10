@@ -1,5 +1,6 @@
 package com.example.authloginmethods.auth
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -10,11 +11,8 @@ import com.example.authloginmethods.R
 import com.example.authloginmethods.screens.view_models.UserDetailsViewModel
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthProvider
 import kotlinx.android.synthetic.main.fragment_phone_number.*
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
@@ -30,14 +28,10 @@ class Authenticate(private val fragment: Fragment) {
     fun signInAnomyus() {
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val user = task.result!!.user
-                val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
-                    if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
-                userDetailsViewModel.setInfo(listOfInfo)//set info about user account
+                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))
                 try {
                     fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)//navigate to fragment
                 }catch (ex:Exception){}
-                Log.d("TAG",user.uid)
             } else Toast.makeText(fragment.context, "Error when creating anon account", Toast.LENGTH_SHORT).show()
         }
     }
@@ -55,13 +49,7 @@ class Authenticate(private val fragment: Fragment) {
     fun getCurrentUser(){
         val user = auth.currentUser
         if(user!=null) {
-            val listOfInfo = arrayListOf<String>(
-                user.uid,
-                if (!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
-                if (!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number",
-                if (!user.email.isNullOrEmpty()) user.email!! else "No email"
-            )
-            userDetailsViewModel.setInfo(listOfInfo)//set info about user account
+            userDetailsViewModel.setInfo(setListOfUserInfo(user))               //get info about user account
             fragment.findNavController()
                 .navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
         }
@@ -83,6 +71,7 @@ class Authenticate(private val fragment: Fragment) {
                 signInWithPhoneAuthCredential(credential)
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onVerificationFailed(e: FirebaseException) {
                 Log.w("TAG", "onVerificationFailed", e)
 
@@ -102,7 +91,7 @@ class Authenticate(private val fragment: Fragment) {
         }
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            phoneNumber, // Phone number to verify
+            phoneNumber, // Phone number to verify                                      //verifi phone number
             60, // Timeout duration
             TimeUnit.SECONDS, // Unit of timeout
             fragment.requireActivity(), // Activity (for callback binding)
@@ -112,7 +101,7 @@ class Authenticate(private val fragment: Fragment) {
         fragment.userVerifyCodeButton.setOnClickListener {
             try{
                 val credential = PhoneAuthProvider.getCredential(storedVerificationId!!,fragment.userInputVerificationId.text.toString())
-                signInWithPhoneAuthCredential(credential)
+                signInWithPhoneAuthCredential(credential)       //check verifi code
             }catch (ex:Exception){}
 
         }
@@ -127,13 +116,8 @@ class Authenticate(private val fragment: Fragment) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = task.result!!.user
-                    val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
-                        if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
-                    userDetailsViewModel.setInfo(listOfInfo)//set info about user account
+                    userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))
                     fragment.findNavController().navigate(R.id.action_phoneNumberFragment_to_userDetailsFragment)//navigate to fragment
-                    Log.d("TAG",user.uid)
-
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         fragment.error_message.text = "Bad verification code ${task.exception?.message}"
@@ -150,14 +134,10 @@ class Authenticate(private val fragment: Fragment) {
         Toast.makeText(fragment.context,"Loading...", Toast.LENGTH_SHORT).show()
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {task->
             if (task.isSuccessful) {
-                val user = task.result!!.user
-                val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
-                    if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
-                userDetailsViewModel.setInfo(listOfInfo)//set info about user account
+                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))
                 try {
                     fragment.findNavController().navigate(R.id.action_loginFragment_to_userDetailsFragment)//navigate to fragment
                 }catch (ex:java.lang.Exception){}
-                Log.d("TAG",user.uid)
             } else Toast.makeText(fragment.context, "Error when creating account", Toast.LENGTH_SHORT).show()
         }
     }
@@ -167,18 +147,21 @@ class Authenticate(private val fragment: Fragment) {
         Toast.makeText(fragment.context,"Loading...", Toast.LENGTH_SHORT).show()
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {task->
             if (task.isSuccessful) {
-                val user = task.result!!.user
-                val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
-                    if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
-                userDetailsViewModel.setInfo(listOfInfo)//set info about user account
+                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))//set info about user account
                 try {
                     fragment.findNavController().navigate(R.id.action_loginFragment_to_userDetailsFragment)//navigate to fragment
                 }catch (ex:java.lang.Exception){}
-                Log.d("TAG",user.uid)
             } else Toast.makeText(fragment.context, "Error when creating account", Toast.LENGTH_SHORT).show()
         }
     }
+    //=============================================================
 
 
+
+
+    private fun setListOfUserInfo(user:FirebaseUser) : ArrayList<String> {
+        return arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
+            if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
+    }
 
 }

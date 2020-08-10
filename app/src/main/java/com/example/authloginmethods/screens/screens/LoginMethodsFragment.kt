@@ -44,12 +44,10 @@ class LoginMethodsFragment : Fragment() {
         //-------------email and password login--------------
         loginAndPasswordLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginFragment)
-
-            //phone number login
-            phoneLogin.setOnClickListener {
-                findNavController().navigate(R.id.action_loginMethodsFragment_to_phoneNumberFragment)
-
-            }
+        }
+        //phone number login
+        phoneLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_loginMethodsFragment_to_phoneNumberFragment)
         }
     }
 
