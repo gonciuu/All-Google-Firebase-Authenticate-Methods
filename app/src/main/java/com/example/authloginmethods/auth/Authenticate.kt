@@ -11,6 +11,7 @@ import com.example.authloginmethods.R
 import com.example.authloginmethods.screens.view_models.UserDetailsViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -158,13 +159,24 @@ class Authenticate(private val fragment: Fragment) {
 
     //-----------------------set user data in list and return this-----------------------
     private fun setListOfUserInfo(user:FirebaseUser) : ArrayList<String> {
-        return arrayListOf(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
-            if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
+        return arrayListOf(user.uid, try{ user.displayName!!} catch(ex:Exception){"No display name"},
+            try{ user.phoneNumber!!} catch(ex:Exception){"No phone number"}, try{ user.email!!} catch(ex:Exception){"No email"})
     }
     //===================================================================================
 
     fun firebaseAuthWithGoogle(idToken:String){
-
+        val credential = GoogleAuthProvider.getCredential(idToken,null)
+        auth.signInWithCredential(credential).addOnCompleteListener {task->
+            if(task.isSuccessful) {
+                userDetailsViewModel.setInfo(setListOfUserInfo(task.result?.user!!))//set info about user account
+                try {
+                    fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
+                }catch (ex:java.lang.Exception){}
+            }else{
+                Log.w("TAG", "signInWithCredential:failure", task.exception)
+                Snackbar.make(fragment.requireView(), "Authentication Failed. ${task.exception}", Snackbar.LENGTH_SHORT).show()
+            }
+        }
 
     }
 
