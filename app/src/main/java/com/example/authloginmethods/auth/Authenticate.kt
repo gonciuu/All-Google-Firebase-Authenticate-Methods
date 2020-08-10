@@ -1,6 +1,7 @@
 package com.example.authloginmethods.auth
 
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.android.synthetic.main.fragment_phone_number.*
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class Authenticate(private val fragment: Fragment) {
@@ -66,39 +69,33 @@ class Authenticate(private val fragment: Fragment) {
     //-------------------------------Login with phone number-----------------------------
     fun loginWithPhoneNumber(phoneNumber:String){
 
-        var storedVerificationId = ""
-        var resendToken: PhoneAuthProvider.ForceResendingToken
+        var storedVerificationId:String? = null
 
+        auth.setLanguageCode("pl")
 
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 Log.d("TAG", "onVerificationCompleted:$credential")
+                fragment.error_message.text = ""
                 signInWithPhoneAuthCredential(credential)
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
-                // This callback is invoked in an invalid request for verification is made,
-                // for instance if the the phone number format is not valid.
                 Log.w("TAG", "onVerificationFailed", e)
+
+                when (e) {
+                    is FirebaseAuthInvalidCredentialsException -> fragment.error_message.text = "Bad phone number. Try again with another number. ${e.message}"
+                    is FirebaseTooManyRequestsException -> fragment.error_message.text = "To many requests try again later. ${e.message}"
+                    else -> fragment.error_message.text = "Error ${e.message}"
+                }
             }
 
-            override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
-            ) {
-                // The SMS verification code has been sent to the provided phone number, we
-                // now need to ask the user to enter the code and then construct a credential
-                // by combining the code with a verification ID.
+            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                 Log.d("TAG", "onCodeSent:$verificationId")
-
-                // Save verification ID and resending token so we can use them later
                 storedVerificationId = verificationId
-                resendToken = token
-
-
-
-                // ...
+                fragment.userInputVerificationId.visibility = View.VISIBLE
+                fragment.userVerifyCodeButton.visibility = View.VISIBLE
             }
         }
 
@@ -107,30 +104,40 @@ class Authenticate(private val fragment: Fragment) {
             60, // Timeout duration
             TimeUnit.SECONDS, // Unit of timeout
             fragment.requireActivity(), // Activity (for callback binding)
-            callbacks) // OnVerificationStateChangedCallbacks
+            callbacks)
 
-        auth.setLanguageCode("pl")
 
-        Log.d("TAG",phoneNumber)
+        fragment.userVerifyCodeButton.setOnClickListener {
+            try{
+                val credential = PhoneAuthProvider.getCredential(storedVerificationId!!,fragment.userInputVerificationId.text.toString())
+                signInWithPhoneAuthCredential(credential)
+            }catch (ex:Exception){}
+
+        }
+
+
     }
-    //===================================================================================
+
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithCredential:success")
+                    val user = task.result!!.user
+                    val listOfInfo = arrayListOf<String>(user.uid, if(!user.displayName.isNullOrEmpty()) user.displayName!! else "No display name",
+                        if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
+                    userDetailsViewModel.setInfo(listOfInfo)//set info about user account
+                    fragment.findNavController().navigate(R.id.action_phoneNumberFragment_to_userDetailsFragment)//navigate to fragment
+                    Log.d("TAG",user.uid)
 
-                    val user = task.result?.user
                 } else {
-                    // Sign in failed, display a message and update the UI
-                    Log.w("TAG", "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-
+                        fragment.error_message.text = "Bad verification code ${task.exception?.message}"
                     }
                 }
             }
     }
+
+    //===================================================================================
 
 }

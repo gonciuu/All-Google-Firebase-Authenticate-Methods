@@ -37,6 +37,8 @@
         android:textColor="#343434"/>
 
 
+
+
     <Button
         android:id="@+id/userLoginWithPhoneButton"
         android:layout_width="match_parent"
@@ -50,4 +52,48 @@
         android:fontFamily="@font/segoeui"
         android:textColor="#ffffff"/>
 
+
+    <EditText
+        android:id="@+id/userInputVerificationId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="#ffffff"
+        android:drawableLeft="@drawable/ic_nb"
+        android:drawablePadding="20dp"
+        android:visibility="gone"
+        android:fontFamily="@font/segoeui"
+        android:hint="Enter Verify Code"
+        android:inputType="phone"
+        android:padding="15dp"
+        android:textColor="#343434" />
+
+    <Button
+        android:id="@+id/userVerifyCodeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#008EFF"
+        android:fontFamily="@font/segoeui"
+        android:text="Verify"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FF0000"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textAlignment="center"
+        android:fontFamily="@font/segoeui"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"/>
 </LinearLayout>
