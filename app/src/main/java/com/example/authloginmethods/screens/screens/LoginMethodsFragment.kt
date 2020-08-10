@@ -64,6 +64,7 @@ class LoginMethodsFragment : Fragment() {
     private fun makeLoadingText() = Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
 
 
+    // ------------------------- configure google sign in options--------------------------------
     private fun loginWithGoogleAccount() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(requireActivity().getString(R.string.default_web_client_id))
@@ -71,10 +72,12 @@ class LoginMethodsFragment : Fragment() {
             .build()
         val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         val signInIntent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        startActivityForResult(signInIntent, RC_SIGN_IN)        //start google accounts login intent
     }
+    //============================================================================================
 
 
+    //---------------------on google choose account activity resoult login with google account------------------------
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -82,13 +85,12 @@ class LoginMethodsFragment : Fragment() {
             try{
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
-                authenticate.firebaseAuthWithGoogle(account.idToken!!)
+                authenticate.firebaseAuthWithGoogle(account.idToken!!)//login with account id token
             }catch (e:ApiException){
                 Toast.makeText(context,"Api token error $e",Toast.LENGTH_SHORT).show()
                 Log.w("TAG", "Google sign in failed", e)
             }
         }
-
-
     }
+    //=================================================================================================================
 }

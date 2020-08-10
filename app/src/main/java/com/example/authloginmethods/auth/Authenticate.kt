@@ -164,21 +164,23 @@ class Authenticate(private val fragment: Fragment) {
     }
     //===================================================================================
 
+    //-------------------------------------------------login with google account--------------------------------------------------
     fun firebaseAuthWithGoogle(idToken:String){
         val credential = GoogleAuthProvider.getCredential(idToken,null)
         auth.signInWithCredential(credential).addOnCompleteListener {task->
             if(task.isSuccessful) {
                 userDetailsViewModel.setInfo(setListOfUserInfo(task.result?.user!!))//set info about user account
                 try {
-                    fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
+                    fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment) //complete
                 }catch (ex:java.lang.Exception){}
             }else{
                 Log.w("TAG", "signInWithCredential:failure", task.exception)
-                Snackbar.make(fragment.requireView(), "Authentication Failed. ${task.exception}", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(fragment.requireView(), "Authentication Failed. ${task.exception}", Snackbar.LENGTH_SHORT).show() //failure
             }
         }
 
     }
+    //=============================================================================================================================
 
 
 }
