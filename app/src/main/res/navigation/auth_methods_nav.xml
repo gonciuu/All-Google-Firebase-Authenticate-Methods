@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/auth_methods_nav"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_methods_nav"
     app:startDestination="@id/loginMethodsFragment">
 
     <fragment
@@ -13,6 +15,9 @@
         <action
             android:id="@+id/action_loginMethodsFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
+        <action
+            android:id="@+id/action_loginMethodsFragment_to_phoneNumberFragment"
+            app:destination="@id/phoneNumberFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -29,5 +34,14 @@
         <action
             android:id="@+id/action_userDetailsFragment_to_loginMethodsFragment"
             app:destination="@id/loginMethodsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneNumberFragment"
+        android:name="com.example.authloginmethods.screens.screens.PhoneNumberFragment"
+        android:label="fragment_phone_number"
+        tools:layout="@layout/fragment_phone_number" >
+        <action
+            android:id="@+id/action_phoneNumberFragment_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
     </fragment>
 </navigation>

@@ -40,9 +40,16 @@ class LoginMethodsFragment : Fragment() {
             authenticate.signInAnomyus()
         }
 
+
         //-------------email and password login--------------
         loginAndPasswordLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginFragment)
+
+            //phone number login
+            phoneLogin.setOnClickListener {
+                findNavController().navigate(R.id.action_loginMethodsFragment_to_phoneNumberFragment)
+
+            }
         }
     }
 
