@@ -27,6 +27,7 @@ class FacebookLoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         callbackManager= CallbackManager.Factory.create()
 
+        //--------------register callback to facebook login button----------------
         fbLoginButton.setReadPermissions("email", "public_profile")
         fbLoginButton.registerCallback(callbackManager,object : FacebookCallback<LoginResult>{
             override fun onSuccess(result: LoginResult?) {
@@ -43,19 +44,18 @@ class FacebookLoginActivity : AppCompatActivity() {
             }
 
         })
-
-
-
+        //=========================================================================
     }
 
 
+    //-------------fb auth--------------
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode,resultCode,data)
         super.onActivityResult(requestCode, resultCode, data)
-
     }
 
 
+    //---------------------sign in with fb access token credential--------------------------
     private fun loginWithFb(token :AccessToken){
         Log.d("TAG", "handleFacebookAccessToken:$token")
 
@@ -71,8 +71,6 @@ class FacebookLoginActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
     }
+    //=======================================================================================
 }
