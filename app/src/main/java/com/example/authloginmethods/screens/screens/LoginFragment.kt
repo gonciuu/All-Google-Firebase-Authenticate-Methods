@@ -1,6 +1,5 @@
 package com.example.authloginmethods.screens.screens
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.authloginmethods.R
 import com.example.authloginmethods.auth.Authenticate
-import com.example.authloginmethods.screens.view_models.LoginViewModel
 import kotlinx.android.synthetic.main.login_fragment.*
 
 class LoginFragment : Fragment() {
