@@ -63,8 +63,8 @@ class FacebookLoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener { task->
             if(task.isSuccessful){
                 val user = task.result!!.user
-                try{fbNameText.text = user.uid}catch (ex:Exception){fbNameText.text = "No uid"}
-                try{fbEmailText.text = user.email}catch (ex:Exception){fbNameText.text = "No email"}
+                try{fbNameText.text = user.displayName}catch (ex:Exception){fbNameText.text = "No name"}
+                try{fbUidText.text = user.uid}catch (ex:Exception){fbUidText.text = "No uid"}
             }else{
                 Log.w("TAG", "signInWithCredential:failure", task.exception)
                 Toast.makeText(baseContext, "Authentication failed.",
