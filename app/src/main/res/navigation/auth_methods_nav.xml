@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_loginMethodsFragment_to_phoneNumberFragment"
             app:destination="@id/phoneNumberFragment" />
+        <action
+            android:id="@+id/action_loginMethodsFragment_to_loginWithGithub"
+            app:destination="@id/loginWithGithub" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -44,4 +47,9 @@
             android:id="@+id/action_phoneNumberFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loginWithGithub"
+        android:name="com.example.authloginmethods.screens.screens.LoginWithGithub"
+        android:label="fragment_login_with_github"
+        tools:layout="@layout/fragment_login_with_github" />
 </navigation>
