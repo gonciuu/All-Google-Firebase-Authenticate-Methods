@@ -57,18 +57,22 @@ class LoginMethodsFragment : Fragment() {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_phoneNumberFragment)
         }
 
+
         googleLogin.setOnClickListener {
             makeLoadingText()
             loginWithGoogleAccount()
-
-
         }
         facebookLogin.setOnClickListener {
             val intent = Intent(context, FacebookLoginActivity::class.java)
             startActivity(intent)
 
         }
+        githubLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
+
+        }
     }
+
 
         private fun makeLoadingText() =
             Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
