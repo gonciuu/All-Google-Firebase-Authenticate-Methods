@@ -21,10 +21,10 @@ class LoginWithGithub : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        authenticate = Authenticate(this)
 
+        //-------------------open github page to login--------------------
+        authenticate = Authenticate(this)
         val provider: OAuthProvider.Builder = OAuthProvider.newBuilder("github.com")
-        provider.addCustomParameter("login", "your-email@gmail.com")
         authenticate.loginWithGithub(provider)
     }
 }
