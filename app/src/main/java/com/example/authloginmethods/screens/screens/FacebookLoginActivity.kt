@@ -62,7 +62,7 @@ class FacebookLoginActivity : AppCompatActivity() {
         val credential = FacebookAuthProvider.getCredential(token.token)
         auth.signInWithCredential(credential).addOnCompleteListener { task->
             if(task.isSuccessful){
-                val user = task.result!!.user
+                val user = task.result!!.user!!
                 try{fbNameText.text = user.displayName}catch (ex:Exception){fbNameText.text = "No name"}
                 try{fbUidText.text = user.uid}catch (ex:Exception){fbUidText.text = "No uid"}
             }else{
