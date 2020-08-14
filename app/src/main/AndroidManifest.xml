@@ -9,10 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-=======
-        <activity android:name=".screens.screens.FacebookLoginActivity"></activity>
->>>>>>> feature/login_with_facebook
+        <activity android:name=".screens.screens.FacebookLoginActivity" />
         <activity android:name=".screens.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

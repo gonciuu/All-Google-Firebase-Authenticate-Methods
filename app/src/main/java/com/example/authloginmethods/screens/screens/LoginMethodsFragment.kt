@@ -61,41 +61,47 @@ class LoginMethodsFragment : Fragment() {
             makeLoadingText()
             loginWithGoogleAccount()
 
+
+        }
         facebookLogin.setOnClickListener {
-            val intent = Intent(context,FacebookLoginActivity::class.java)
+            val intent = Intent(context, FacebookLoginActivity::class.java)
             startActivity(intent)
 
         }
     }
 
-    private fun makeLoadingText() = Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
+        private fun makeLoadingText() =
+            Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
 
 
-    // ------------------------- configure google sign in options--------------------------------
-    private fun loginWithGoogleAccount() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(requireActivity().getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-        val signInIntent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)        //start google accounts login intent
-    }
-    //============================================================================================
+        // ------------------------- configure google sign in options--------------------------------
+        private fun loginWithGoogleAccount() {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(requireActivity().getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+            val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+            val signInIntent = mGoogleSignInClient.signInIntent
+            startActivityForResult(
+                signInIntent,
+                RC_SIGN_IN
+            )        //start google accounts login intent
+        }
+        //============================================================================================
 
 
-    //---------------------on google choose account activity resoult login with google account------------------------
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try{
-                val account = task.getResult(ApiException::class.java)!!
-                authenticate.firebaseAuthWithGoogle(account.idToken!!)//login with account id token
-            }catch (e:ApiException){
-                Toast.makeText(context,"Api token error $e",Toast.LENGTH_SHORT).show()
+        //---------------------on google choose account activity resoult login with google account------------------------
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode == RC_SIGN_IN) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    authenticate.firebaseAuthWithGoogle(account.idToken!!)//login with account id token
+                } catch (e: ApiException) {
+                    Toast.makeText(context, "Api token error $e", Toast.LENGTH_SHORT).show()
+                }
             }
         }
+        //=================================================================================================================
     }
-    //=================================================================================================================
-}
