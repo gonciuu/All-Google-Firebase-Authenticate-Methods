@@ -28,7 +28,7 @@ class Authenticate(private val fragment: Fragment) {
     fun signInAnomyus() {
         auth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))
+                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user!!))
                 try {
                     fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)//navigate to fragment
                 }catch (ex:Exception){}
@@ -116,7 +116,7 @@ class Authenticate(private val fragment: Fragment) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))
+                    userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user!!))
                     fragment.findNavController().navigate(R.id.action_phoneNumberFragment_to_userDetailsFragment)//navigate to fragment
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
@@ -134,7 +134,7 @@ class Authenticate(private val fragment: Fragment) {
         Toast.makeText(fragment.context,"Loading...", Toast.LENGTH_SHORT).show()
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener {task->
             if (task.isSuccessful) {
-                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))
+                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user!!))
                 try {
                     fragment.findNavController().navigate(R.id.action_loginFragment_to_userDetailsFragment)//navigate to fragment
                 }catch (ex:java.lang.Exception){}
@@ -147,7 +147,7 @@ class Authenticate(private val fragment: Fragment) {
         Toast.makeText(fragment.context,"Loading...", Toast.LENGTH_SHORT).show()
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener {task->
             if (task.isSuccessful) {
-                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user))//set info about user account
+                userDetailsViewModel.setInfo(setListOfUserInfo(task.result!!.user!!))//set info about user account
                 try {
                     fragment.findNavController().navigate(R.id.action_loginFragment_to_userDetailsFragment)//navigate to fragment
                 }catch (ex:java.lang.Exception){}
@@ -162,6 +162,16 @@ class Authenticate(private val fragment: Fragment) {
             if(!user.displayName.isNullOrEmpty()) user.phoneNumber!! else "No phone number", if(!user.email.isNullOrEmpty()) user.email!! else "No email")
     }
     //===================================================================================
+
+    fun loginWithGithub(provider: OAuthProvider.Builder){
+        auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
+            .addOnSuccessListener { authResult->
+                setListOfUserInfo(authResult.user!!)
+                fragment.findNavController().navigate(R.id.action_loginWithGithub_to_userDetailsFragment)
+            }.addOnFailureListener {
+                Log.d("TAG","${it.message}")
+            }
+    }
 
 
 }
