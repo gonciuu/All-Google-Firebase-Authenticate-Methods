@@ -167,7 +167,12 @@ class Authenticate(private val fragment: Fragment) {
     fun loginWithGithub(provider: OAuthProvider.Builder){
         auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
             .addOnSuccessListener { authResult->
-                setListOfUserInfo(authResult.user!!)
+                val user = authResult.additionalUserInfo
+                val firebaseUser = auth.currentUser
+                userDetailsViewModel.setInfo(arrayListOf<String>(try{user!!.username!!}catch (ex:Exception){""},
+                    try{user!!.isNewUser.toString()}catch (ex:Exception){""},
+                    try{firebaseUser!!.uid}catch (ex:Exception){""},
+                    try{user!!.providerId!!}catch (ex:Exception){""}))
                 fragment.findNavController().navigate(R.id.action_loginWithGithub_to_userDetailsFragment)
             }.addOnFailureListener {
                 Log.d("TAG","${it.message}")
