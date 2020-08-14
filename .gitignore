@@ -60,3 +60,4 @@ node_modules/
 libraries/tools/kotlin-test-js-runner/lib/
 local.properties
 app/google-services.json
+app/src/main/res/values/strings.xml
