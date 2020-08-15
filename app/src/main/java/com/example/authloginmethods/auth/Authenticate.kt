@@ -199,6 +199,7 @@ class Authenticate(private val fragment: Fragment) {
     }
     //=============================================================================
 
+    //----------------------login with twitter account-------------------------
     fun loginWithTwitter(provider: OAuthProvider.Builder){
         auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
             .addOnSuccessListener { authResult->
@@ -213,6 +214,7 @@ class Authenticate(private val fragment: Fragment) {
                 Log.d("TAG","${it.message}")
             }
     }
+    //============================================================================
 
 
 }

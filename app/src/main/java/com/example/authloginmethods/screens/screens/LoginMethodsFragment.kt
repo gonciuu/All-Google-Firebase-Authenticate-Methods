@@ -71,6 +71,7 @@ class LoginMethodsFragment : Fragment() {
         githubLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
         }
+        //login with twitter
         twitterLogin.setOnClickListener {
             val provider = OAuthProvider.newBuilder("twitter.com")
             authenticate.loginWithTwitter(provider)
