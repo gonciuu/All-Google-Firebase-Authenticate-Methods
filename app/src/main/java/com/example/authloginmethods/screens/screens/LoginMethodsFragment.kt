@@ -16,6 +16,7 @@ import com.example.authloginmethods.auth.Authenticate
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.OAuthProvider
 import kotlinx.android.synthetic.main.login_methods_fragment.*
 
 
@@ -69,7 +70,10 @@ class LoginMethodsFragment : Fragment() {
         }
         githubLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
-
+        }
+        yahooLogin.setOnClickListener {
+            val provider  : OAuthProvider.Builder = OAuthProvider.newBuilder("yahoo.com")
+            authenticate.loginWithYahoo(provider)
         }
     }
 

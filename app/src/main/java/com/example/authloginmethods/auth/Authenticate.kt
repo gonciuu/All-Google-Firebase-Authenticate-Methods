@@ -200,4 +200,21 @@ class Authenticate(private val fragment: Fragment) {
     //=============================================================================
 
 
+    fun loginWithYahoo(provider: OAuthProvider.Builder){
+        auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
+            .addOnSuccessListener { result->
+                Log.d("TAG","${result.additionalUserInfo!!.username}")
+                val user = result.additionalUserInfo
+                val firebaseUser = result.user
+                userDetailsViewModel.setInfo(arrayListOf<String>(try{firebaseUser!!.uid}catch (ex:Exception){""},
+                    try{user!!.isNewUser.toString()}catch (ex:Exception){""},
+                    try{user!!.username!!}catch (ex:Exception){""},
+                    try{user!!.providerId!!}catch (ex:Exception){""}))
+                fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
+            }.addOnFailureListener {
+                Log.d("TAG","${it.message}")
+            }
+    }
+
+
 }
