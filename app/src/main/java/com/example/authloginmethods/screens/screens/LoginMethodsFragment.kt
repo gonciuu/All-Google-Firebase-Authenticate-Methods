@@ -71,6 +71,7 @@ class LoginMethodsFragment : Fragment() {
         githubLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
         }
+        //login with yahoo
         yahooLogin.setOnClickListener {
             val provider  : OAuthProvider.Builder = OAuthProvider.newBuilder("yahoo.com")
             authenticate.loginWithYahoo(provider)

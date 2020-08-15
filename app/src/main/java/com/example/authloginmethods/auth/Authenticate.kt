@@ -200,6 +200,7 @@ class Authenticate(private val fragment: Fragment) {
     //=============================================================================
 
 
+    //---------------------------------------------login with yahoo account--------------------------------------------------
     fun loginWithYahoo(provider: OAuthProvider.Builder){
         auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
             .addOnSuccessListener { result->
@@ -215,6 +216,7 @@ class Authenticate(private val fragment: Fragment) {
                 Log.d("TAG","${it.message}")
             }
     }
+    //=========================================================================================================================
 
 
 }
