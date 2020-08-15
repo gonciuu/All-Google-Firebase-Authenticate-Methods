@@ -188,10 +188,10 @@ class Authenticate(private val fragment: Fragment) {
             .addOnSuccessListener { authResult->
                 val user = authResult.additionalUserInfo
                 val firebaseUser = auth.currentUser
-                userDetailsViewModel.setInfo(arrayListOf<String>(try{user!!.username!!}catch (ex:Exception){""},
+                userDetailsViewModel.setInfo(arrayListOf<String>(try{firebaseUser!!.uid}catch (ex:Exception){"empty uid"},
                     try{user!!.isNewUser.toString()}catch (ex:Exception){""},
-                    try{firebaseUser!!.uid}catch (ex:Exception){""},
-                    try{user!!.providerId!!}catch (ex:Exception){""}))
+                    try{user!!.username!!}catch (ex:Exception){"empty username"},
+                    try{user!!.providerId!!}catch (ex:Exception){"empty provider id"}))
                 fragment.findNavController().navigate(R.id.action_loginWithGithub_to_userDetailsFragment)
             }.addOnFailureListener {
                 Log.d("TAG","${it.message}")
@@ -206,10 +206,10 @@ class Authenticate(private val fragment: Fragment) {
                 Log.d("TAG","${result.additionalUserInfo!!.username}")
                 val user = result.additionalUserInfo
                 val firebaseUser = result.user
-                userDetailsViewModel.setInfo(arrayListOf<String>(try{firebaseUser!!.uid}catch (ex:Exception){""},
+                userDetailsViewModel.setInfo(arrayListOf<String>(try{firebaseUser!!.uid}catch (ex:Exception){"empty uid"},
                     try{user!!.isNewUser.toString()}catch (ex:Exception){""},
-                    try{user!!.username!!}catch (ex:Exception){""},
-                    try{user!!.providerId!!}catch (ex:Exception){""}))
+                    try{user!!.username!!}catch (ex:Exception){"empty username"},
+                    try{user!!.providerId!!}catch (ex:Exception){"empty provider id"}))
                 fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
             }.addOnFailureListener {
                 Log.d("TAG","${it.message}")
