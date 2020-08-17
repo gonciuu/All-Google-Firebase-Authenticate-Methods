@@ -3,19 +3,22 @@ package com.example.authloginmethods.screens.screens
 
 import android.content.Intent
 import android.os.Bundle
-
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.authloginmethods.R
 import com.example.authloginmethods.auth.Authenticate
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.OAuthProvider
 import kotlinx.android.synthetic.main.login_methods_fragment.*
 
@@ -72,6 +75,7 @@ class LoginMethodsFragment : Fragment() {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
         }
 
+
         //login with yahoo
         yahooLogin.setOnClickListener {
             val provider: OAuthProvider.Builder = OAuthProvider.newBuilder("yahoo.com")
@@ -83,6 +87,12 @@ class LoginMethodsFragment : Fragment() {
             val provider = OAuthProvider.newBuilder("twitter.com")
             authenticate.loginWithTwitter(provider)
 
+        }
+
+        //login with microsoft
+        microsoftLogin.setOnClickListener {
+            val provider = OAuthProvider.newBuilder("microsoft.com")
+            authenticate.loginWithMicrosoft(provider)
         }
     }
 

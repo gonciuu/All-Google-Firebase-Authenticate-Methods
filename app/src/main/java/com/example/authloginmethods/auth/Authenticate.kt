@@ -199,21 +199,48 @@ class Authenticate(private val fragment: Fragment) {
     }
     //=============================================================================
 
+
     //----------------------login with twitter account-------------------------
     fun loginWithTwitter(provider: OAuthProvider.Builder){
+        auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
+            .addOnSuccessListener { authResult ->
+                val user = authResult.additionalUserInfo
+                val firebaseUser = auth.currentUser
+                userDetailsViewModel.setInfo(
+                    arrayListOf<String>(
+                        try { user!!.username!! } catch (ex: Exception) { "no username" },
+                        try { user!!.isNewUser.toString() } catch (ex: Exception) { "" },
+                        try { firebaseUser!!.uid } catch (ex: Exception) { "empty uid" },
+                        try { user!!.providerId!! } catch (ex: Exception) { "empty provider id" }
+                    )
+                )
+                fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
+            }
+            .addOnFailureListener {
+                Log.d("TAG","${it.message}")
+            }
+    }
+
+    //-------------------------------login with microsoft-------------------------------------
+    fun loginWithMicrosoft(provider: OAuthProvider.Builder){
+
         auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
             .addOnSuccessListener { authResult->
                 val user = authResult.additionalUserInfo
                 val firebaseUser = auth.currentUser
-                userDetailsViewModel.setInfo(arrayListOf<String>(try{user!!.username!!}catch (ex:Exception){"no username"},
+
+
+                userDetailsViewModel.setInfo(arrayListOf<String>(try{user!!.username!!}catch (ex:Exception){""},
                     try{user!!.isNewUser.toString()}catch (ex:Exception){""},
-                    try{firebaseUser!!.uid}catch (ex:Exception){"empty uid"},
-                    try{user!!.providerId!!}catch (ex:Exception){"empty provider id"}))
+                    try{firebaseUser!!.uid}catch (ex:Exception){""},
+                    try{user!!.providerId!!}catch (ex:Exception){""}))
+
                 fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
             }.addOnFailureListener {
                 Log.d("TAG","${it.message}")
             }
     }
+
     //============================================================================
 
 
@@ -234,6 +261,9 @@ class Authenticate(private val fragment: Fragment) {
             }
     }
     //=========================================================================================================================
+
+
+    //=========================================================================================
 
 
 }
