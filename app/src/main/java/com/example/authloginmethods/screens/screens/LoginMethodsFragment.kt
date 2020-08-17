@@ -74,6 +74,8 @@ class LoginMethodsFragment : Fragment() {
         githubLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
         }
+
+
         //login with microsoft
         microsoftLogin.setOnClickListener {
             val provider = OAuthProvider.newBuilder("microsoft.com")
