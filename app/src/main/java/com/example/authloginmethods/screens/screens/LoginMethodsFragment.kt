@@ -94,6 +94,11 @@ class LoginMethodsFragment : Fragment() {
             val provider = OAuthProvider.newBuilder("microsoft.com")
             authenticate.loginWithMicrosoft(provider)
         }
+        //login_with_apple
+        appleLogin.setOnClickListener {
+            val provider = OAuthProvider.newBuilder("apple.com")
+            authenticate.loginWithApple(provider)
+        }
     }
 
 

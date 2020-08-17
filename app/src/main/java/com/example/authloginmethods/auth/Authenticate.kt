@@ -265,5 +265,25 @@ class Authenticate(private val fragment: Fragment) {
 
     //=========================================================================================
 
+    //---------------------------login with apple id-------------------------------
+    fun loginWithApple(provider: OAuthProvider.Builder){
+
+        auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
+            .addOnSuccessListener { authResult ->
+                Log.d("TAG","$authResult")
+                val user = authResult.additionalUserInfo
+                val firebaseUser = auth.currentUser
+                userDetailsViewModel.setInfo(arrayListOf<String>(try{user!!.username!!}catch (ex:Exception){""},
+                    try{user!!.isNewUser.toString()}catch (ex:Exception){""},
+                    try{firebaseUser!!.uid}catch (ex:Exception){""},
+                    try{user!!.providerId!!}catch (ex:Exception){""}))
+                fragment.findNavController().navigate(R.id.action_loginWithGithub_to_userDetailsFragment)
+            }.addOnFailureListener {
+                Log.d("TAG","${it.message}")
+            }
+
+    }
+    //===============================================================================
+
 
 }
