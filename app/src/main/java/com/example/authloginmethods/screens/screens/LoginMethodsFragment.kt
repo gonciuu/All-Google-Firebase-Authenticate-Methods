@@ -3,6 +3,7 @@ package com.example.authloginmethods.screens.screens
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,10 @@ import com.example.authloginmethods.auth.Authenticate
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.OAuthProvider
 import kotlinx.android.synthetic.main.login_methods_fragment.*
 
@@ -68,7 +73,6 @@ class LoginMethodsFragment : Fragment() {
         }
         githubLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
-
         }
         microsoftLogin.setOnClickListener {
             val provider = OAuthProvider.newBuilder("microsoft.com")

@@ -199,10 +199,9 @@ class Authenticate(private val fragment: Fragment) {
     }
     //=============================================================================
 
-
     fun loginWithMicrosoft(provider: OAuthProvider.Builder){
         auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
-            .addOnSuccessListener {authResult->
+            .addOnSuccessListener { authResult->
                 val user = authResult.additionalUserInfo
                 val firebaseUser = auth.currentUser
                 userDetailsViewModel.setInfo(arrayListOf<String>(try{user!!.username!!}catch (ex:Exception){""},
@@ -214,4 +213,5 @@ class Authenticate(private val fragment: Fragment) {
                 Log.d("TAG","${it.message}")
             }
     }
+
 }
