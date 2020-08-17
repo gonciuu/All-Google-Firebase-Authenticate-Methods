@@ -3,19 +3,18 @@ package com.example.authloginmethods.screens.screens
 
 import android.content.Intent
 import android.os.Bundle
-
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.authloginmethods.R
 import com.example.authloginmethods.auth.Authenticate
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.OAuthProvider
 import kotlinx.android.synthetic.main.login_methods_fragment.*
 
 
@@ -70,6 +69,10 @@ class LoginMethodsFragment : Fragment() {
         githubLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
 
+        }
+        appleLogin.setOnClickListener {
+            val provider = OAuthProvider.newBuilder("apple.com")
+            authenticate.loginWithApple(provider)
         }
     }
 
