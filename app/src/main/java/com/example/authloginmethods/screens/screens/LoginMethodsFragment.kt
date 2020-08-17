@@ -71,10 +71,18 @@ class LoginMethodsFragment : Fragment() {
         githubLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
         }
+
         //login with yahoo
         yahooLogin.setOnClickListener {
-            val provider  : OAuthProvider.Builder = OAuthProvider.newBuilder("yahoo.com")
+            val provider: OAuthProvider.Builder = OAuthProvider.newBuilder("yahoo.com")
             authenticate.loginWithYahoo(provider)
+        }
+
+        //login with twitter
+        twitterLogin.setOnClickListener {
+            val provider = OAuthProvider.newBuilder("twitter.com")
+            authenticate.loginWithTwitter(provider)
+
         }
     }
 
@@ -106,7 +114,7 @@ class LoginMethodsFragment : Fragment() {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 try {
                     val account = task.getResult(ApiException::class.java)!!
-                    authenticate.firebaseAuthWithGoogle(account.idToken!!)//login with account id token
+                    authenticate.firebaseAuthWithGoogle(account.idToken!!)                      //login with account id token
                 } catch (e: ApiException) {
                     Toast.makeText(context, "Api token error $e", Toast.LENGTH_SHORT).show()
                 }
