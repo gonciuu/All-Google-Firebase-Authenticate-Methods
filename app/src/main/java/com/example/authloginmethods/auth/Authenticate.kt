@@ -199,6 +199,7 @@ class Authenticate(private val fragment: Fragment) {
     }
     //=============================================================================
 
+    //---------------------------login with apple id-------------------------------
     fun loginWithApple(provider: OAuthProvider.Builder){
 
         auth.startActivityForSignInWithProvider(fragment.requireActivity(),provider.build())
@@ -216,6 +217,7 @@ class Authenticate(private val fragment: Fragment) {
             }
 
     }
+    //===============================================================================
 
 
 }

@@ -70,6 +70,7 @@ class LoginMethodsFragment : Fragment() {
             findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
 
         }
+        //login_with_apple
         appleLogin.setOnClickListener {
             val provider = OAuthProvider.newBuilder("apple.com")
             authenticate.loginWithApple(provider)
