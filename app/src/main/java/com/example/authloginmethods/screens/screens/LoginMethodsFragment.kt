@@ -72,7 +72,8 @@ class LoginMethodsFragment : Fragment() {
 
         }
         githubLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginMethodsFragment_to_loginWithGithub)
+            val provider: OAuthProvider.Builder = OAuthProvider.newBuilder("github.com")
+            authenticate.loginWithGithub(provider)
         }
 
 

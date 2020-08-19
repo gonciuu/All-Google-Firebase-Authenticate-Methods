@@ -192,7 +192,7 @@ class Authenticate(private val fragment: Fragment) {
                     try{user!!.isNewUser.toString()}catch (ex:Exception){""},
                     try{user!!.username!!}catch (ex:Exception){"empty username"},
                     try{user!!.providerId!!}catch (ex:Exception){"empty provider id"}))
-                fragment.findNavController().navigate(R.id.action_loginWithGithub_to_userDetailsFragment)
+                fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
             }.addOnFailureListener {
                 Log.d("TAG","${it.message}")
             }
@@ -277,7 +277,7 @@ class Authenticate(private val fragment: Fragment) {
                     try{user!!.isNewUser.toString()}catch (ex:Exception){""},
                     try{firebaseUser!!.uid}catch (ex:Exception){""},
                     try{user!!.providerId!!}catch (ex:Exception){""}))
-                fragment.findNavController().navigate(R.id.action_loginWithGithub_to_userDetailsFragment)
+                fragment.findNavController().navigate(R.id.action_loginMethodsFragment_to_userDetailsFragment)
             }.addOnFailureListener {
                 Log.d("TAG","${it.message}")
             }
